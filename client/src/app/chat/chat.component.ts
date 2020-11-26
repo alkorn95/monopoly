@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit {
     this.initModel();
     this.style = 0;
     // Using timeout due to https://github.com/angular/angular/issues/14748
-    setTimeout(() => {
+    setTimeout(() => {      
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
   }
@@ -114,7 +114,6 @@ export class ChatComponent implements OnInit {
   private getRandomId(): number {
     return Math.floor(Math.random() * (1000000)) + 1;
   }
-
 
 
   private openUserPopup(params): void {
