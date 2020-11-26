@@ -61,9 +61,9 @@ export class ChatServer {
         let isZero = false;
         let currentUser = m.content.split(',')[0];
         let toUser = m.content.split(',')[1];
-        let money = parseInt(m.content.split(',')[2])-parseInt(m.content.split(',')[2])%10;
-        if(money==NaN||money<0)
-        money=0;
+        let money = parseInt(m.content.split(',')[2]) - parseInt(m.content.split(',')[2]) % 10;
+        if (money == NaN || money < 0)
+          money = 0;
         if (currentUser == "bank" && !users.includes(toUser)) {
           users.push(toUser);
           moneys.push(money);
@@ -78,8 +78,7 @@ export class ChatServer {
         if (toUser == "bank" && users.includes(currentUser)) {
           let mon = parseInt(moneys[users.indexOf(currentUser)]);
           mon -= money;
-          if (mon < 0) 
-          {
+          if (mon < 0) {
             isZero = true;
             mon += money;
           }
@@ -89,17 +88,16 @@ export class ChatServer {
         if (users.includes(toUser) && users.includes(currentUser)) {
           let mon1 = parseInt(moneys[users.indexOf(currentUser)]);
           mon1 -= money;
-          if (mon1 < 0) 
-          {
+          if (mon1 < 0) {
             isZero = true;
             mon1 += money;
           }
           moneys[users.indexOf(currentUser)] = mon1 + "";
 
-          if(!isZero){
-          let mon2 = parseInt(moneys[users.indexOf(toUser)]);
-          mon2 += money;
-          moneys[users.indexOf(toUser)] = mon2 + "";
+          if (!isZero) {
+            let mon2 = parseInt(moneys[users.indexOf(toUser)]);
+            mon2 += money;
+            moneys[users.indexOf(toUser)] = mon2 + "";
           }
         }
 
@@ -108,21 +106,21 @@ export class ChatServer {
           fs.appendFileSync("1.txt", users[i] + "\n");
           fs.appendFileSync("1.txt", moneys[i] + "\n");
         }
-        
+
 
         let n = new Message(m.from, users + "|" + moneys + "|" + currentUser + ">>>" + toUser + " " + money);
         if (currentUser == "bank")
           n = new Message(m.from, users + "|" + moneys + "|" + toUser + " ПОЛУЧИЛ " + money);
         if (toUser == "bank")
           n = new Message(m.from, users + "|" + moneys + "|" + currentUser + " ОТДАЛ " + money);
-          if(isZero)
-          n = new Message(m.from, users + "|" + moneys + "|" + currentUser + " хотел заплатить " + money+", но у него закончились деньги");
-          if(currentUser=="new game"&&money==2330){
-        fs.writeFileSync("1.txt", "");
-        n = new Message(m.from, users + "|" + moneys + "|" + "Новая игра");
-          }
-          if(money!=0)
-        this.io.emit("message", n);
+        if (isZero)
+          n = new Message(m.from, users + "|" + moneys + "|" + currentUser + " хотел заплатить " + money + ", но у него закончились деньги");
+        if (currentUser == "new game" && money == 2330) {
+          fs.writeFileSync("1.txt", "");
+          n = new Message(m.from, users + "|" + moneys + "|" + "Новая игра");
+        }
+        if (money != 0 || toUser == "update")
+          this.io.emit("message", n);
       });
 
       socket.on("disconnect", () => {

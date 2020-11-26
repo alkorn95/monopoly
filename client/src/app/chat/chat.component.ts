@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit {
     this.initModel();
     this.style = 0;
     // Using timeout due to https://github.com/angular/angular/issues/14748
-    setTimeout(() => {      
+    setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
   }
@@ -86,13 +86,21 @@ export class ChatComponent implements OnInit {
             this.moneys[i] = this.names[i] + " " + this.moneys[i];
           }
         }
-        if (message.action == Action.JOINED)
+        if (message.action == Action.JOINED) {
           msg += message.from.name + " подключился"
+          if (message.from.name == this.user.name)
+            this.socketService.send({
+              from: this.user,
+              content: this.user.name + ",update,0"
+            });
+        }
         if (message.action == Action.LEFT)
           msg += message.from.name + " вышел"
-        this.messages.push(msg);
-        if(this.messages.length>200)
-        this.messages=this.messages.slice(1);
+        if (!msg.includes("update"))
+        if(!(this.names.includes(message.from.name)&&message.action == Action.JOINED))
+          this.messages.push(msg);
+        if (this.messages.length > 200)
+          this.messages = this.messages.slice(1);
         setTimeout(() => {
           var elem = document.getElementById('chat');
           elem.scrollTop = elem.scrollHeight;
@@ -189,12 +197,11 @@ export class ChatComponent implements OnInit {
   }
 
   public switchStyle(): void {
-    if (this.style != 1){
+    if (this.style != 1) {
       this.style++;
       document.body.style.backgroundColor = "black";
     }
-    else
-    {
+    else {
       this.style = 0;
       document.body.style.backgroundColor = "white";
     }
