@@ -1,0 +1,28 @@
+<div [ngClass]="{'container': style==0, 'container1': style==1 }">
+  <div class="chat-container" id="chat">
+    <mat-list-item class="chatItem" *ngFor="let message of messages">
+      <div  class="rightChatItem" *ngIf="message[0]==' '; else elseBlock" style="text-align:right;">
+        {{message}}
+      </div>
+      <ng-template  #elseBlock>{{message}}</ng-template>
+    </mat-list-item>
+  </div>
+  <div class="bottom-container">
+    <input type="number" id="inp" size="40" [(ngModel)]="money">
+    <div class="buttons">
+      <button class="buttonCss" (click)="toBank()">В банк</button>
+      <button class="buttonCss" (click)="fromBank()">Из банка</button>
+      <div class="money-info">
+        <div *ngFor=" let money of moneys">
+          <p class="moneyInfoContainer">{{money}}</p>
+        </div>
+      </div>
+      <div>
+        <div *ngFor=" let name of names">
+          <button class="buttonUsers" *ngIf="name!=user.name" (click)="toPlayer(name)">{{name}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="buttonUsers" (click)="switchStyle()">switch</button>
+</div>

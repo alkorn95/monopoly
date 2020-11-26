@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    align-items: center;
+  }
+  
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(40deg, rgba(252, 0, 0, 0.85) 0%, rgba(99, 0, 173, 0.9) 100%);
+  }
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    background-image: radial-gradient( farthest-corner at 10px 10px, rgba(169, 172, 0, 1) 0%, rgba(1, 146, 21, 1) 50%, rgba(1, 78, 5, 1) 100%)
+  }
+  
+  .chat-container {
+    box-sizing: border-box;
+    padding: 20px;
+    height: 300px;
+    width: 99%;
+    overflow: auto;
+  }
+  
+  .money-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  
+  }
+  
+  input {
+  
+    padding: 10px;
+  }
+  
+  .moneyInfoContainer {
+    margin: 1px;
+    font-weight: 800;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .chatItem {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .rightChatItem {
+    color: white;  
+  }
+  
+  .bottom-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .buttonCss {
+    margin: 5px;
+    display: block;
+    padding: 5px 0;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 200px;
+    font-weight: 800;
+    color: black;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+  
+  }
+  
+  .buttonUsers {
+    margin: 3px;
+    display: block;
+    padding: 5px 0;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 200px;
+    font-weight: 800;
+    color: black;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+  }
