@@ -62,7 +62,7 @@ export class ChatServer {
         let currentUser = m.content.split(',')[0];
         let toUser = m.content.split(',')[1];
         let money = parseInt(m.content.split(',')[2])-parseInt(m.content.split(',')[2])%10;
-        if(money==NaN)
+        if(money==NaN||money<0)
         money=0;
         if (currentUser == "bank" && !users.includes(toUser)) {
           users.push(toUser);
@@ -121,6 +121,7 @@ export class ChatServer {
         fs.writeFileSync("1.txt", "");
         n = new Message(m.from, users + "|" + moneys + "|" + "Новая игра");
           }
+          if(money!=0)
         this.io.emit("message", n);
       });
 
