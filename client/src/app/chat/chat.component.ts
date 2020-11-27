@@ -97,8 +97,8 @@ export class ChatComponent implements OnInit {
         if (message.action == Action.LEFT)
           msg += message.from.name + " вышел"
         if (!msg.includes("update"))
-        if(!(this.names.includes(message.from.name)&&message.action == Action.JOINED))
-          this.messages.push(msg);
+          if (!(this.names.includes(message.from.name) && message.action == Action.JOINED))
+            this.messages.push(msg);
         if (this.messages.length > 200)
           this.messages = this.messages.slice(1);
         setTimeout(() => {
@@ -157,10 +157,21 @@ export class ChatComponent implements OnInit {
   public toBank(): void {
     if (this.money == undefined)
       return;
-    this.socketService.send({
-      from: this.user,
-      content: this.user.name + ",bank," + this.money
-    });
+    if (this.money == "11") {
+      if (this.style != 1) {
+        this.style++;
+        document.body.style.backgroundColor = "black";
+      }
+      else {
+        this.style = 0;
+        document.body.style.backgroundColor = "white";
+      }
+    }
+    else
+      this.socketService.send({
+        from: this.user,
+        content: this.user.name + ",bank," + this.money
+      });
     //(<HTMLInputElement>document.getElementById('inp')).value = '';
     this.money = undefined;
 
@@ -171,6 +182,17 @@ export class ChatComponent implements OnInit {
     this.socketService.send({
       from: this.user,
       content: "bank," + this.user.name + "," + this.money
+    });
+    // (<HTMLInputElement>document.getElementById('inp')).value = '';
+    this.money = undefined;
+  }
+
+  public fromBank2kk(): void {
+    if (this.money == undefined)
+      return;
+    this.socketService.send({
+      from: this.user,
+      content: "bank," + this.user.name + ",2000"
     });
     // (<HTMLInputElement>document.getElementById('inp')).value = '';
     this.money = undefined;
@@ -196,16 +218,7 @@ export class ChatComponent implements OnInit {
     this.socketService.send(message);
   }
 
-  public switchStyle(): void {
-    if (this.style != 1) {
-      this.style++;
-      document.body.style.backgroundColor = "black";
-    }
-    else {
-      this.style = 0;
-      document.body.style.backgroundColor = "white";
-    }
-  }
+  
 
 
 }
