@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef, Input } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatList, MatListItem } from '@angular/material/list';
+import { DOCUMENT } from '@angular/common';
 
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
@@ -39,7 +40,9 @@ export class ChatComponent implements OnInit {
       title_pt: 'Bem-vindo',
       dialogType: DialogUserType.NEW
     }
+    
   };
+  elem:any;
 
   // getting a reference to the overall list, which is the parent container of the list items
   @ViewChild(MatList, { read: ElementRef, static: true }) matList: ElementRef;
@@ -49,10 +52,13 @@ export class ChatComponent implements OnInit {
 
   constructor(private socketService: SocketService,
     private storedUser: StoreUserService,
-    public dialog: MatDialog, private translate: TranslateService) {
+    public dialog: MatDialog, private translate: TranslateService
+   ) {
+      
   }
 
   ngOnInit(): void {
+    this.elem = document.documentElement;
     this.initModel();
     this.style = 0;
     // Using timeout due to https://github.com/angular/angular/issues/14748
@@ -160,8 +166,9 @@ export class ChatComponent implements OnInit {
     if (this.money == "0") {
       if (this.style != 1) {
         this.style++;
-        document.body.style.backgroundColor = "black";
+        document.body.style.backgroundColor="rgba(1, 112, 13, 1)"
         document.body.style.margin="0px";
+        this.elem.webkitRequestFullscreen();
       }
       else {
         this.style = 0;

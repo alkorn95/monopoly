@@ -48,11 +48,9 @@
 .container .chatItem {
   font-size: 16px;
   font-weight: 500;
+  color: white; 
 }
 
-.container .rightChatItem {
-  color: white;  
-}
 
 .container .bottom-container {
   display: flex;
