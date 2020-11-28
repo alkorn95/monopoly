@@ -40,9 +40,9 @@ export class ChatComponent implements OnInit {
       title_pt: 'Bem-vindo',
       dialogType: DialogUserType.NEW
     }
-    
+
   };
-  elem:any;
+  elem: any;
 
   // getting a reference to the overall list, which is the parent container of the list items
   @ViewChild(MatList, { read: ElementRef, static: true }) matList: ElementRef;
@@ -53,8 +53,8 @@ export class ChatComponent implements OnInit {
   constructor(private socketService: SocketService,
     private storedUser: StoreUserService,
     public dialog: MatDialog, private translate: TranslateService
-   ) {
-      
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -166,8 +166,8 @@ export class ChatComponent implements OnInit {
     if (this.money == "0") {
       if (this.style != 1) {
         this.style++;
-        document.body.style.backgroundColor="rgba(1, 112, 13, 1)"
-        document.body.style.margin="0px";
+        document.body.style.backgroundColor = "rgba(1, 112, 13, 1)"
+        document.body.style.margin = "0px";
         this.elem.webkitRequestFullscreen();
       }
       else {
@@ -226,7 +226,7 @@ export class ChatComponent implements OnInit {
     this.socketService.send(message);
   }
 
-  
+
 
 
 }
