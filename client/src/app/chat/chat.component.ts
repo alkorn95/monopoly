@@ -157,10 +157,11 @@ export class ChatComponent implements OnInit {
   public toBank(): void {
     if (this.money == undefined)
       return;
-    if (this.money == "1") {
+    if (this.money == "0") {
       if (this.style != 1) {
         this.style++;
         document.body.style.backgroundColor = "black";
+        document.body.style.margin="0px";
       }
       else {
         this.style = 0;
